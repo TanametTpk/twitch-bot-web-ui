@@ -12,12 +12,12 @@ interface Props {
 // 🛡️
 const KillFeed = (props: Props) => {
     useEffect(() => {
-        socket.on("feed", (message: string) => {
+        socket.on("feed:message", (message: string) => {
             displayFeed(message)
         })
         
         return () => {
-            socket.off("feed")
+            socket.off("feed:message")
         }
     }, [])
 
