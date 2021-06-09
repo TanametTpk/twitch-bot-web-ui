@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { notification } from 'antd';
 import './assets/index.css';
 import socket from '../../socket';
+import { NotificationPlacement } from 'antd/lib/notification';
 
 interface Props {
     
@@ -12,8 +13,8 @@ interface Props {
 // 🛡️
 const KillFeed = (props: Props) => {
     useEffect(() => {
-        socket.on("feed:message", (message: string) => {
-            displayFeed(message)
+        socket.on("feed:message", (message: string, placement: string, duration: number) => {
+            displayFeed(message, placement as NotificationPlacement, duration)
         })
         
         return () => {
@@ -21,12 +22,12 @@ const KillFeed = (props: Props) => {
         }
     }, [])
 
-    const displayFeed = (message: string) => {
+    const displayFeed = (message: string, placement: NotificationPlacement , duration: number) => {
         notification.open({
             key: Math.random().toString(),
             message,
-            placement: "topLeft",
-            duration: 1.5,
+            placement,
+            duration,
             style: {
                 borderRadius: '6px',
                 width: "100%"
