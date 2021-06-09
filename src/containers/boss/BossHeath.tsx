@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Progress } from 'antd'
 import bossImage from './assets/fire-boss.svg'
 import socket from '../../socket'
+import './assets/index.css'
 
 interface Props {
 
@@ -33,26 +34,25 @@ const BossHeath = (props: Props) => {
 
     return (
         <>
-            {
-                boss && <div
+            <div
+                className={"boss " + (boss ? "" : "hide")}
+                style={{
+                    width: '25vw'
+                }}
+            >
+                <img
                     style={{
-                        width: '25vw'
+                        width: '100%'
                     }}
-                >
-                    <img
-                        style={{
-                            width: '100%'
-                        }}
-                        src={bossImage}
-                    />
-                    <Progress
-                        percent={boss.hp}
-                        size="small"
-                        status="exception"
-                        showInfo={false}
-                    />
-                </div>
-            }
+                    src={bossImage}
+                />
+                <Progress
+                    percent={boss?.hp}
+                    size="small"
+                    status="exception"
+                    showInfo={false}
+                />
+            </div>
         </>
     )
 }
