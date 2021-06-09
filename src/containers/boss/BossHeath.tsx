@@ -46,7 +46,7 @@ const BossHeath = (props: Props) => {
                         src={bossImage}
                     />
                     <Progress
-                        percent={70}
+                        percent={boss.hp}
                         size="small"
                         status="exception"
                         showInfo={false}
