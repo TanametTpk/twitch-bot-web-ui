@@ -1,6 +1,7 @@
-import React from 'react'
-import { Button, notification } from 'antd';
+import React, { useEffect } from 'react'
+import { notification } from 'antd';
 import './assets/index.css';
+import socket from '../../socket';
 
 interface Props {
     
@@ -10,6 +11,16 @@ interface Props {
 // 🗡️
 // 🛡️
 const KillFeed = (props: Props) => {
+    useEffect(() => {
+        socket.on("feed", (message: string) => {
+            displayFeed(message)
+        })
+        
+        return () => {
+            socket.off("feed")
+        }
+    }, [])
+
     const displayFeed = (message: string) => {
         notification.open({
             key: Math.random().toString(),
@@ -27,9 +38,7 @@ const KillFeed = (props: Props) => {
     }
 
     return (
-        <div>
-            <Button onClick={() => displayFeed("A 🛡️🗡️ B")} >click me</Button>
-        </div>
+        <div />
     )
 }
 
