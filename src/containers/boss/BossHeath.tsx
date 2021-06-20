@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Progress } from 'antd'
-import bossImage from './assets/boss.png'
 import socket from '../../socket'
 import './assets/index.css'
 
@@ -12,6 +11,7 @@ interface BossInfo {
     hp: number
     max_hp: number
     level: number
+    image: string
 }
 
 const BossHeath = (props: Props) => {
@@ -51,11 +51,11 @@ const BossHeath = (props: Props) => {
                     style={{
                         width: '100%'
                     }}
-                    src={"http://localhost:8080/assets/boss.png"}
+                    src={boss?.image}
                 />
                 <Progress
                     percent={(boss?.hp || 1) / (boss?.max_hp || 1) * 100}
-                    strokeWidth={20}
+                    strokeWidth={30}
                     status="exception"
                     showInfo={false}
                 />
